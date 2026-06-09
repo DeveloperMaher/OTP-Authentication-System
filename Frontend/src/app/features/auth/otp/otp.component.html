@@ -1,0 +1,35 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-2">Verify OTP</h2>
+    <p class="text-gray-500 mb-6">Enter the 6-digit code sent to your email</p>
+
+    <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+
+        <div formArrayName="otp" class="flex justify-between gap-2">
+
+            <input *ngFor="let ctrl of otpControls; let i = index"
+                [formControlName]="i"
+                maxlength="1"
+                class="w-12 h-12 text-center border rounded-lg focus:ring-2 focus:ring-blue-400"
+                (input)="moveNext($event, i)" />
+
+        </div>
+
+        <button class="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg">
+            Verify OTP
+        </button>
+
+    </form>
+
+    <p *ngIf="errorMessage" class="text-red-500 mt-4">
+      {{ errorMessage }}
+    </p>
+
+    <p *ngIf="successMessage" class="text-green-600 mt-4">
+      {{ successMessage }}
+    </p>
+
+  </div>
+</div>
